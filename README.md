@@ -1,6 +1,6 @@
 # Azure Firewall to ZIA Firewall Rules Automation Script
 
-[![Watch the video demonstration on Loom](https://www.loom.com/embed/7d33dfc5ca2c416182086732381eb1cc?sid=40e76d3e-c218-470f-8e95-840fc655cc88)](https://www.loom.com/embed/7d33dfc5ca2c416182086732381eb1cc?sid=40e76d3e-c218-470f-8e95-840fc655cc88)
+<a href="https://www.loom.com/embed/7d33dfc5ca2c416182086732381eb1cc?sid=40e76d3e-c218-470f-8e95-840fc655cc88" target="_blank">Watch the video demonstration on Loom</a>
 
 ## Overview
 
