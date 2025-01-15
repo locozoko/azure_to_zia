@@ -28,7 +28,7 @@ This Python script automates the process of reading Azure Firewall rules and cre
 python3 -m venv zsvenv && source zsvenv/bin/activate
 ```
 
-2\. Required Python Libraries:
+2. Required Python Libraries:
 
 Install the following libraries using pip:
 
@@ -36,7 +36,7 @@ Install the following libraries using pip:
 pip install azure-identity azure-mgmt-network azure-mgmt-resource requests
 ```
 
-3\. Azure Credentials:
+3. Azure Credentials:
 
 - Ensure that you have valid Azure credentials configured for the DefaultAzureCredential class.
 
@@ -48,7 +48,7 @@ pip install azure-identity azure-mgmt-network azure-mgmt-resource requests
 
 - FIREWALL_POLICY_NAME
 
-4\. ZIA Credentials:
+4. ZIA Credentials:
 
 - Update the following variables with your ZIA account details:
 
@@ -60,7 +60,7 @@ pip install azure-identity azure-mgmt-network azure-mgmt-resource requests
 
 - ZIA_API_KEY
 
-5\. Firewall API Permissions:
+5. Firewall API Permissions:
 
 - Ensure the Azure account has Reader access to the subscription/resource group.
 
@@ -70,7 +70,9 @@ pip install azure-identity azure-mgmt-network azure-mgmt-resource requests
 
 1. Update Variables:
 
-Edit the script to fill in the required Azure and ZIA credentials. 2. Run the Script:
+Edit the script to fill in the required Azure and ZIA credentials.
+
+2. Run the Script:
 
 Execute the script with Python:
 
@@ -78,7 +80,7 @@ Execute the script with Python:
 python azurefw-to-ziafirewall.py
 ```
 
-3\. Interactive Confirmation:
+3. Interactive Confirmation:
 
 - The script prompts you to confirm whether to proceed with creating Zscaler objects.
 
@@ -86,59 +88,43 @@ python azurefw-to-ziafirewall.py
 
 ## What the Script Does
 
-1. Fetch Data:
+1. Authenticates with Azure and Zscaler
+2. Fetches Data from Azure and Zscaler
 
-- Retrieves Azure IP Groups and Firewall Rules.
+- Gets Azure IP Groups
+- Gets Azure Firewall Rules
+- Gets Zscaler IP Source Groups
+- Gets Zscaler Network Services
+- Gets Zscaler Network Service Groups
+- Gets Zscaler Firewall Rules
 
-- Fetches existing ZIA IP Source Groups, Network Services, Service Groups, and Firewall Rules.
+3. Exports Data for Reference and Debugging from Azure and Zscaler
 
-- Exports all data to JSON files for reference. 2. Create Resources:
+- Saves Azure data to json files (same directory as script)
+- Saves Zscaler data to json files (same directory as script)
 
-- IP Source Groups: Creates missing ZIA IP Source Groups based on Azure IP Groups.
+4. Processes Azure Firewall Rules
 
-- Network Services: Creates missing ZIA Network Services for each protocol/port combination in Azure rules.
+- Maps Azure Firewall Rule components to correspending Zscaler objects
 
-- Network Service Groups: Creates ZIA Network Service Groups for each Azure rule referencing relevant network services.
+5. Creates Missing Zscaler objects
 
-- Firewall Rules: Creates ZIA Firewall Rules matching Azure Firewall Rules. 3. Activate Changes:
+- Maps Azure IP groups to Zscaler IP Source Groups
+- Converts Azure protocols and ports to Network Services (per unique combination)
+- Groups Network Services into logical groups to match Azure Firewall rules
+- Creates Zscaler Firewall Rules to enforce policies that mirror Azure Firewall Rules
 
-- If new ZIA Firewall Rules are created, the script activates the pending changes in ZIA.
+6. Handles Dependencies Automatically
 
-Optional Configuration
+- Ensures all required Zscaler objects are created before associating with Firewall Rules
 
-- Target Specific Azure Rule:
+7. Activates Zscaler changes
 
-To process only one specific Azure rule, set the TARGET_AZURE_RULE_NAME variable to the name of the rule:
+- Once all objects in Zscaler are created the script automatically activates changes
 
-TARGET_AZURE_RULE_NAME = "customhttpport"
+8. Prompts user to confirm attempt to create Zscaler objects after fetching data
 
-Leave it blank ("") to process all Azure rules.
-
-Error Handling
-
-- The script logs errors for any failed API calls or invalid inputs.
-
-- Rate limits from the ZIA API are handled with retries after a short delay.
-
-- Invalid or incomplete data (e.g., missing ports or protocols) are skipped with appropriate warnings.
-
-Output
-
-- The script creates or skips resources as necessary and logs all actions.
-
-- JSON files containing fetched data are saved in the same directory for reference:
-
-- azure_ip_groups.json
-
-- azure_firewall_rules.json
-
-- zscaler_ip_source_groups.json
-
-- zscaler_network_services.json
-
-- zscaler_network_service_groups.json
-
-- zscaler_firewall_rules.json
+- Allows you to run the script to only fetch data or to also attempt creating Zscaler objects
 
 ## Support
 
