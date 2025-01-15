@@ -4,7 +4,9 @@
 
 This Python script automates the process of reading Azure Firewall rules and creating corresponding resources in the Zscaler Internet Access (ZIA) platform. It ensures that firewall policies from Azure are mirrored in ZIA, including IP groups, network services, network service groups, and firewall rules.
 
-Key Features 1. Azure Integration: Fetches Azure Firewall rules and IP groups from a specified subscription, resource group, and firewall policy. 2. ZIA Integration: Authenticates with the ZIA API to retrieve and create resources, including:
+## Key Features
+
+1. Azure Integration: Fetches Azure Firewall rules and IP groups from a specified subscription, resource group, and firewall policy. 2. ZIA Integration: Authenticates with the ZIA API to retrieve and create resources, including:
 
 - IP Source Groups
 
