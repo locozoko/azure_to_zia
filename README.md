@@ -1,6 +1,6 @@
-Azure Firewall to ZIA Firewall Rules Automation Script
+# Azure Firewall to ZIA Firewall Rules Automation Script
 
-Overview
+## Overview
 
 This Python script automates the process of reading Azure Firewall rules and creating corresponding resources in the Zscaler Internet Access (ZIA) platform. It ensures that firewall policies from Azure are mirrored in ZIA, including IP groups, network services, network service groups, and firewall rules.
 
@@ -14,7 +14,9 @@ Key Features 1. Azure Integration: Fetches Azure Firewall rules and IP groups fr
 
 - Firewall Rules 3. Incremental Creation: Avoids duplication by checking for existing resources before creating new ones. 4. Customizable Execution: Allows optional targeting of specific Azure rules (TARGET_AZURE_RULE_NAME) or all rules. 5. Interactive Prompts: Provides a prompt before starting Zscaler object creation for user confirmation. 6. Error Handling: Logs errors, including invalid inputs, rate limits, and API failures, while attempting retries when possible.
 
-Prerequisites 1. Python Environment:
+## Prerequisites
+
+1. Python Environment:
 
 - Install Python 3.7 or later.
 
@@ -62,13 +64,17 @@ pip install azure-identity azure-mgmt-network azure-mgmt-resource requests
 
 - Ensure the ZIA account has API access for firewall-related resources.
 
-Usage 1. Update Variables:
+## Usage
+
+1. Update Variables:
 
 Edit the script to fill in the required Azure and ZIA credentials. 2. Run the Script:
 
 Execute the script with Python:
 
+```bash
 python azurefw-to-ziafirewall.py
+```
 
 3\. Interactive Confirmation:
 
@@ -76,7 +82,9 @@ python azurefw-to-ziafirewall.py
 
 - If you type "n" or "no," the script exits gracefully without making any changes.
 
-What the Script Does 1. Fetch Data:
+## What the Script Does
+
+1. Fetch Data:
 
 - Retrieves Azure IP Groups and Firewall Rules.
 
@@ -130,8 +138,8 @@ Output
 
 - zscaler_firewall_rules.json
 
-Support
+## Support
 
-For any issues or questions, contact Zoltan Kovacs at zkovacs@zscaler.com.
+For any issues or questions, contact Zoltan at zkovacs@zscaler.com. This script is a best-effort basis and not officially supported by Zscaler.
 
 This documentation should help customers understand, configure, and run the script effectively.
