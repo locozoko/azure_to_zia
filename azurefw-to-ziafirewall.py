@@ -16,15 +16,15 @@ from azure.mgmt.network import NetworkManagementClient
 from azure.mgmt.resource import SubscriptionClient
 
 # Azure credentials and setup
-SUBSCRIPTION_ID = "bd9c4f24-e09d-4d80-a629-b9e0ed6d4eb2"
-FIREWALL_POLICY_NAME = "zoltan-firewall-policy"
-RESOURCE_GROUP = "zoltan-firewall-test"
+SUBSCRIPTION_ID = "<REPLACE_ME>"
+FIREWALL_POLICY_NAME = "<REPLACE_ME>"
+RESOURCE_GROUP = "<REPLACE_ME>"
 
 # Zscaler credentials
 ZIA_API_URL = "https://zsapi.zscaler.net/api/v1"
-ZIA_USERNAME = "apitest@ikovacs.com"
-ZIA_PASSWORD = "Zscaler123!"
-ZIA_API_KEY = "JeP1wCh5BZ0V"
+ZIA_USERNAME = "<REPLACE_ME>"
+ZIA_PASSWORD = "<REPLACE_ME>"
+ZIA_API_KEY = "<REPLACE_ME>"
 
 # File paths for exported data
 IP_GROUPS_FILE = "azure_ip_groups.json"
