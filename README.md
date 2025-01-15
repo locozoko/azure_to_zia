@@ -6,7 +6,7 @@ This Python script automates the process of reading Azure Firewall rules and cre
 
 ## Key Features
 
-1. Azure Integration: Fetches Azure Firewall rules and IP groups from a specified subscription, resource group, and firewall policy. 2. ZIA Integration: Authenticates with the ZIA API to retrieve and create resources, including:
+1. **Azure Integration:** Fetches Azure Firewall rules and IP groups from a specified subscription, resource group, and firewall policy. 2. ZIA Integration: Authenticates with the ZIA API to retrieve and create resources, including:
 
 - IP Source Groups
 
@@ -14,11 +14,16 @@ This Python script automates the process of reading Azure Firewall rules and cre
 
 - Network Service Groups
 
-- Firewall Rules 3. Incremental Creation: Avoids duplication by checking for existing resources before creating new ones. 4. Customizable Execution: Allows optional targeting of specific Azure rules (TARGET_AZURE_RULE_NAME) or all rules. 5. Interactive Prompts: Provides a prompt before starting Zscaler object creation for user confirmation. 6. Error Handling: Logs errors, including invalid inputs, rate limits, and API failures, while attempting retries when possible.
+- Firewall Rules
+
+3. **Incremental Creation:** Avoids duplication by checking for existing resources before creating new ones.
+4. **Customizable Execution:** Allows optional targeting of specific Azure rules (TARGET_AZURE_RULE_NAME) or all rules.
+5. **Interactive Prompts:** Provides a prompt before starting Zscaler object creation for user confirmation.
+6. **Error Handling:** Logs errors, including invalid inputs, rate limits, and API failures, while attempting retries when possible.
 
 ## Prerequisites
 
-1. Python Environment:
+1. **Python Environment:**
 
 - Install Python 3.7 or later.
 
@@ -36,7 +41,7 @@ Install the following libraries using pip:
 pip install azure-identity azure-mgmt-network azure-mgmt-resource requests
 ```
 
-3. Azure Credentials:
+3. **Azure Credentials:**
 
 - Ensure that you have valid Azure credentials configured for the DefaultAzureCredential class.
 
@@ -48,7 +53,7 @@ pip install azure-identity azure-mgmt-network azure-mgmt-resource requests
 
 - FIREWALL_POLICY_NAME
 
-4. ZIA Credentials:
+4. **ZIA Credentials:**
 
 - Update the following variables with your ZIA account details:
 
@@ -60,7 +65,7 @@ pip install azure-identity azure-mgmt-network azure-mgmt-resource requests
 
 - ZIA_API_KEY
 
-5. Firewall API Permissions:
+5. **Firewall API Permissions:**
 
 - Ensure the Azure account has Reader access to the subscription/resource group.
 
@@ -68,11 +73,11 @@ pip install azure-identity azure-mgmt-network azure-mgmt-resource requests
 
 ## Usage
 
-1. Update Variables:
+1. **Update Variables:**
 
 Edit the script to fill in the required Azure and ZIA credentials.
 
-2. Run the Script:
+2. **Run the Script:**
 
 Execute the script with Python:
 
@@ -80,16 +85,20 @@ Execute the script with Python:
 python azurefw-to-ziafirewall.py
 ```
 
-3. Interactive Confirmation:
+3. **Interactive Confirmation:**
 
 - The script prompts you to confirm whether to proceed with creating Zscaler objects.
 
-- If you type "n" or "no," the script exits gracefully without making any changes.
+- If you type "n" or "no," the script exits gracefully without making any changes in Zscaler (it will only get the data)
 
 ## What the Script Does
 
-1. Authenticates with Azure and Zscaler
-2. Fetches Data from Azure and Zscaler
+1. **Authenticates with Azure and Zscaler**
+
+- Logs into Azure to execute commands using Azure CLI
+- Logs into Zscaler Internet Access to execute APIs
+
+2. **Fetches Data from Azure and Zscaler**
 
 - Gets Azure IP Groups
 - Gets Azure Firewall Rules
@@ -98,31 +107,31 @@ python azurefw-to-ziafirewall.py
 - Gets Zscaler Network Service Groups
 - Gets Zscaler Firewall Rules
 
-3. Exports Data for Reference and Debugging from Azure and Zscaler
+3. **Exports Data for Reference and Debugging from Azure and Zscaler**
 
 - Saves Azure data to json files (same directory as script)
 - Saves Zscaler data to json files (same directory as script)
 
-4. Processes Azure Firewall Rules
+4. **Processes Azure Firewall Rules**
 
 - Maps Azure Firewall Rule components to correspending Zscaler objects
 
-5. Creates Missing Zscaler objects
+5. **Creates Missing Zscaler objects**
 
 - Maps Azure IP groups to Zscaler IP Source Groups
 - Converts Azure protocols and ports to Network Services (per unique combination)
 - Groups Network Services into logical groups to match Azure Firewall rules
 - Creates Zscaler Firewall Rules to enforce policies that mirror Azure Firewall Rules
 
-6. Handles Dependencies Automatically
+6. **Handles Dependencies Automatically**
 
 - Ensures all required Zscaler objects are created before associating with Firewall Rules
 
-7. Activates Zscaler changes
+7. **Activates Zscaler changes**
 
 - Once all objects in Zscaler are created the script automatically activates changes
 
-8. Prompts user to confirm attempt to create Zscaler objects after fetching data
+8. **Prompts user to confirm attempt to create Zscaler objects after fetching data**
 
 - Allows you to run the script to only fetch data or to also attempt creating Zscaler objects
 
