@@ -1,10 +1,11 @@
-# This script was written by Zoltan Kovacs (zkovacs@zscaler.com) for Zscaler customer usage
 # It reads Azure IP Groups, Azure Firewall rules, Zscaler ZIA Source IP Groups, Zscaler ZIA Network Services/Groups, and Zscaler ZIA Firewall Rules
 # It then creates new ZIA resources based on Azure
-# Prerequisite 1: You might need to run in virtual environment: python3 -m venv zsvenv && source zsvenv/bin/activate
-# Prerequisite 2: pip install azure-identity azure-mgmt-network azure-mgmt-resource requests
-# Prerequisite 3: Fill out the variables such as Azure Credentials and ZIA Credentials in the script
+# Prerequisite 1: Python 3.7 or newer
+# Prerequisite 2: You might need to run in virtual environment: python3 -m venv zsvenv && source zsvenv/bin/activate
+# Prerequisite 3: pip install azure-identity azure-mgmt-network azure-mgmt-resource requests
+# Prerequisite 4: Fill out the variables such as Azure Credentials and ZIA Credentials in the script
 # Run the script: python azurefw-to-ziafirewall.py
+
 import os
 import requests
 import json
@@ -15,28 +16,33 @@ from azure.identity import DefaultAzureCredential
 from azure.mgmt.network import NetworkManagementClient
 from azure.mgmt.resource import SubscriptionClient
 
+#### START OF USER INPUT/VARIABLES SECTION ####
+
 # Azure credentials and setup
-SUBSCRIPTION_ID = "<REPLACE_ME>"
-FIREWALL_POLICY_NAME = "<REPLACE_ME>"
-RESOURCE_GROUP = "<REPLACE_ME>"
+SUBSCRIPTION_ID = "<REPLACE_ME>" # Enter your Azure subscription id
+FIREWALL_POLICY_NAME = "<REPLACE_ME>" # Enter the name of the Azure Firewall policy
+RESOURCE_GROUP = "<REPLACE_ME>" # Enter the name of the RG where the policy resides
 
 # Zscaler credentials
-ZIA_API_URL = "https://zsapi.zscaler.net/api/v1"
-ZIA_USERNAME = "<REPLACE_ME>"
-ZIA_PASSWORD = "<REPLACE_ME>"
-ZIA_API_KEY = "<REPLACE_ME>"
+ZIA_CLOUD = "zscaler" #Enter the ZIA cloud you are on, such as zscaler, zscalertwo, zscalerthree, zscloud, etc
+ZIA_API_URL = f"https://zsapi.{ZIA_CLOUD}.net/api/v1"
+ZIA_USERNAME = "<REPLACE_ME>" # Enter the ZIA username to make API calls
+ZIA_PASSWORD = "<REPLACE_ME>" # Enter the ZIA password
+ZIA_API_KEY = "<REPLACE_ME>" # Enter the ZIA API key
 
-# File paths for exported data
+# File paths for exported data (no need to change)
 IP_GROUPS_FILE = "azure_ip_groups.json"
 FIREWALL_RULES_FILE = "azure_firewall_rules.json"
 ZIA_SOURCE_GROUPS_FILE = "zscaler_ip_source_groups.json"
 
 # Option to test a single rule or all of them (leave blank for all)
-TARGET_AZURE_RULE_NAME = ""  # Example: "customhttpport"
+TARGET_AZURE_RULE_NAME = ""  # Optional. If you want to only import a specific rule in the defined policy enter its name here.
 
 # Enable logging
-logging.basicConfig(level=logging.INFO) #set to debug if script fails
-logging.getLogger("urllib3").setLevel(logging.INFO) #set to debug if script fails
+logging.basicConfig(level=logging.INFO) # Change from INFO to DEBUG if script fails
+logging.getLogger("urllib3").setLevel(logging.INFO) # Change from INFO to DEBUG if script fails
+
+#### END OF USER INPUT/VARIABLES SECTION ####
 
 # Prompt to continue Zscaler object creation
 def prompt_confirmation(prompt):
