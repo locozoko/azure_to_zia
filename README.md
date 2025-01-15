@@ -1,5 +1,7 @@
 # Azure Firewall to ZIA Firewall Rules Automation Script
 
+[![Watch the video demonstration on Loom](https://www.loom.com/embed/7d33dfc5ca2c416182086732381eb1cc?sid=40e76d3e-c218-470f-8e95-840fc655cc88)](https://www.loom.com/embed/7d33dfc5ca2c416182086732381eb1cc?sid=40e76d3e-c218-470f-8e95-840fc655cc88)
+
 ## Overview
 
 This Python script automates the process of reading Azure Firewall rules and creating corresponding resources in the Zscaler Internet Access (ZIA) platform. It ensures that firewall policies from Azure are mirrored in ZIA, including IP groups, network services, network service groups, and firewall rules.
