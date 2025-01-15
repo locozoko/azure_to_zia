@@ -137,6 +137,6 @@ python azurefw-to-ziafirewall.py
 
 ## Support
 
-For any issues or questions, contact Zoltan at zkovacs@zscaler.com. This script is a best-effort basis and not officially supported by Zscaler.
+This script is a best-effort basis and not officially supported by Zscaler. Please update/edit as needed
 
 This documentation should help customers understand, configure, and run the script effectively.
